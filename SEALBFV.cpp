@@ -1,10 +1,11 @@
-/****************************************/
-/* SEAL BFV batched velocity calculator */
-/* Author: Alycia N. Carey              */
-/* Parts of code borrowed from:         */
-/* 1_bfv_basics.cpp and 2_encoders.cpp  */
-/* final velocity = V_i + at   m/s      */
-/****************************************/
+/****************************************************/
+/* SEAL BFV batched velocity calculator             */
+/* Original written by: Alycia N. Carey             */
+/* Update and test by: Chen He 						*/
+/* Parts of code borrowed from:                     */
+/* 1_bfv_basics.cpp and 2_encoders.cpp              */
+/* final velocity = V_i + at   m/s                  */
+/****************************************************/
 
 #include <iostream>
 #include <time.h>

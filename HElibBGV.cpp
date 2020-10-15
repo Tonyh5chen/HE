@@ -1,10 +1,11 @@
-/***************************************/
-/* HElib BGV velocity calculator       */
-/* Author: Alycia N. Carey             */
-/* Parts of code borrowed from:        */
-/* BGV_general_example.cpp             */
-/* final velocity = V_i + at   m/s     */
-/***************************************/
+/****************************************************/
+/* HElib BGV velocity calculator         			*/
+/* Original written by: Alycia N. Carey             */
+/* Update and test by: Chen He 						*/
+/* Parts of code borrowed from:        				*/
+/* BGV_general_example.cpp            			    */
+/* final velocity = V_i + at   m/s     				*/
+/****************************************************/
 #include <iostream>
 #include <vector>
 #include <time.h>

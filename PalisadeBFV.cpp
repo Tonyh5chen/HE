@@ -1,10 +1,11 @@
-/***************************************/
-/* PALISADE BFVrns velocity calculator */
-/* Author: Alycia N. Carey             */
-/* Parts of code borrowed from:        */
-/* demo-simple-exmple.cpp              */
-/* final velocity = V_i + at   m/s     */
-/***************************************/
+/****************************************************/
+/* PALISADE BFVrns velocity calculator 				*/
+/* Original written by: Alycia N. Carey             */
+/* Update and test by: Chen He 						*/
+/* Parts of code borrowed from:        				*/
+/* demo-simple-exmple.cpp              				*/
+/* final velocity = V_i + at   m/s     				*/
+/****************************************************/
 
 #include "palisade.h"
 #include "math/matrix.h"

@@ -1,10 +1,11 @@
-/***************************************/
-/* PALISADE CKKS velocity calculator   */
-/* Author: Alycia N. Carey             */
-/* Parts of code borrowed from:        */
-/* demo-simple-real-numbers.cpp        */
-/* final velocity = V_i + at   m/s     */
-/***************************************/
+/****************************************************/
+/* PALISADE CKKS velocity calculator                */
+/* Original written by: Alycia N. Carey             */
+/* Update and test by: Chen He 						*/
+/* Parts of code borrowed from:                     */
+/* demo-simple-real-numbers.cpp                     */
+/* final velocity = V_i + at   m/s                  */
+/****************************************************/
 #include "palisade.h"
 #include <iostream>
 #include <vector>

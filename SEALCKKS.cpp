@@ -1,10 +1,11 @@
-/****************************************/
-/* SEAL CKKS velocity calculator        */
-/* Author: Alycia N. Carey              */
-/* Parts of code borrowed from:         */
-/* 4_CKKS_basics.cpp                    */
-/* final velocity = V_i + at   m/s      */
-/****************************************/
+/****************************************************/
+/* SEAL CKKS velocity calculator                    */
+/* Original written by: Alycia N. Carey             */
+/* Update and test by: Chen He 						*/
+/* Parts of code borrowed from:                     */
+/* 4_CKKS_basics.cpp                                */
+/* final velocity = V_i + at   m/s                  */
+/****************************************************/
 
 #include <iostream>
 #include <time.h>
