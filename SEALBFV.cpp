@@ -23,19 +23,22 @@ int example_bfv_basics()
     cc_clock = clock();
 
     EncryptionParameters parms(scheme_type::BFV);
-    size_t poly_modulus_degree = 8192; //
+    size_t poly_modulus_degree = 4096; //8192 or 16384 or 32768
     parms.set_poly_modulus_degree(poly_modulus_degree);
+    auto count=CoeffModulus::MaxBitCount(poly_modulus_degree);
+    cout << "count: " << count << endl;
     parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
-
+    //cout << "parms_set_coeff_modulus: " << coeff_modulus << endl;
     //Enable batching
     parms.set_plain_modulus(PlainModulus::Batching(poly_modulus_degree, 20));
 
     auto context = SEALContext::Create(parms);
-    //print_parameters(context);
-    
+    print_parameters(context);
+    cout << "Parameter validation (success): " << context->parameter_error_message() << endl;
     //Verify that batching is enabled
-    //auto qualifiers = context->first_context_data()->qualifiers();
-    //cout << "Batching enabled: " << boolalpha << qualifiers.using_batching << endl;
+    auto qualifiers = context->first_context_data()->qualifiers();
+    cout << "Batching enabled: " << boolalpha << qualifiers.using_batching << endl;
+    cout << "Parameters for SEAL: " << boolalpha << qualifiers.parameters_set() << endl;
 
     /*****Generate keys and functions*****/
     clock_t key_clock;
@@ -44,7 +47,6 @@ int example_bfv_basics()
     KeyGenerator keygen(context);
     PublicKey public_key = keygen.public_key();
     SecretKey secret_key = keygen.secret_key();
-    //RelinKeys relin_keys = keygen.relin_keys();
     Serializable<RelinKeys> rlk = keygen.relin_keys();
 
     key_clock = clock() - key_clock;
@@ -53,9 +55,10 @@ int example_bfv_basics()
     Evaluator evaluator(context);
     Decryptor decryptor(context, secret_key);
 
-    //Set up batch encoder
+    //Set up batch encoderbatch encoder
     BatchEncoder batch_encoder(context);
     size_t slot_count = batch_encoder.slot_count();
+    cout << "slot_count: "<< slot_count << endl;
     size_t row_size = slot_count / 2;
     
     
@@ -64,33 +67,39 @@ int example_bfv_basics()
     clock_t enc_clock;
     enc_clock = clock();
     //Generate the matrices of values 
-    // int N = 2760; //or 100 or 1000
+    int N = 2760; //or 100 or 1000 or 2760 or 4096 or 8192 or 16384 or 32768
     // vector<uint64_t> initial_velocity(slot_count, 0ULL);    
     // vector<uint64_t> times(slot_count, 0ULL);               
-    // vector<uint64_t> acc(slot_count, 0ULL);                 
+    // vector<uint64_t> acc(slot_count, 0ULL);   
+    vector<uint64_t> initial_velocity;    
+    vector<uint64_t> times;               
+    vector<uint64_t> acc;               
 
+    for(int i = 0; i < N; i++)
+    {
+        int64_t a = rand() % 10000 + 1;
+        acc.push_back(a);
+
+        int64_t b = rand() % 10000 + 1;
+        initial_velocity.push_back(b);
+
+        int64_t c = rand() % 10000 + 1;
+        times.push_back(c);
+    }
     // for(int r = 0; r < 2; r++)
     // {
     //     for(int c = 0; c < N/2; c++) 
     //     {
-    //         unsigned long long int a = rand() % 25;
+    //         unsigned long long int a = rand() % 10;
     //         acc[r*row_size + c] = a;
 
-    //         unsigned long long int b = rand() % 50;
+    //         unsigned long long int b = rand() % 10;
     //         initial_velocity[r*row_size + c] = b;
 
-    //         unsigned long long int d = rand() % 30;
+    //         unsigned long long int d = rand() % 10;
     //         times[r*row_size + c] = d;
     //     }
     // }
-    
-    int N = 10; //2760
-    vector<int64_t> initial_velocity={1,2,3,4,5,6,7,8,9,1};
-    vector<int64_t> times= {10,14,24,23,18,9,13,7,9,1}; 
-    vector<int64_t> acc={1,2,3,2,1,2,1,2,9,1}; 
-    // std::cout << "Initial Velocity \n\t" << initial_velocity << std::endl;
-    // std::cout << "Times \n\t" << times << std::endl;
-    // std::cout << "Acceleration \n\t" << acc << std::endl;
     
     
     
@@ -111,6 +120,9 @@ int example_bfv_basics()
     encryptor.encrypt(plain_initial_vel, enc_initial_vel);
     encryptor.encrypt(plain_times, enc_times);
     encryptor.encrypt(plain_acc, enc_acc);
+    // encryptor.encrypt(initial_velocity, enc_initial_vel);
+    // encryptor.encrypt(times, enc_times);
+    // encryptor.encrypt(acc, enc_acc);
 
     enc_clock = clock() - enc_clock;
 
@@ -130,24 +142,30 @@ int example_bfv_basics()
     dec_clock = clock();
 
     Plaintext plain_final_vel;
+    vector<uint64_t> final_vel;
 
     decryptor.decrypt(enc_final_vel, plain_final_vel);
-    
+    //decryptor.decrypt(final_vel, plain_final_vel);
     dec_clock = clock() - dec_clock;
 
     /*****Decode*****/
-    vector<uint64_t> final_vel;
+    //vector<uint64_t> final_vel;
     batch_encoder.decode(plain_final_vel, final_vel);
     
     /*****Print*****/
     cout << "Starting the velocity caluculator with " << N << " instances. "<< endl << endl;
-    
-    print_vector(initial_velocity, N);
-    print_vector(times, N);
-    print_vector(acc, N);
-    print_vector(final_vel,N);
-    //cout << "Final Velocity: " << endl;
-    //cout << "final_vel \n\t" << final_vel << endl;
+    cout << "Acceleration: " << endl;
+    // print_matrix(acc, row_size);
+    print_vector(acc);
+    cout << "Initial Velocity(size): " << initial_velocity.size() << endl;
+    //print_matrix(initial_velocity, row_size);
+    print_vector(initial_velocity);
+    cout << "Time(size): " << times.size()<< endl;
+    print_vector(times);
+    //print_matrix(times, row_size);
+    cout << " Final Velocity(size): "<<final_vel.size() << endl;
+    //print_matrix(final_vel, row_size);
+    print_vector(final_vel);
 
     cout << "Times:" <<endl;
     cout << "Parameter Generation  : " << ((float)cc_clock)/CLOCKS_PER_SEC << endl;
