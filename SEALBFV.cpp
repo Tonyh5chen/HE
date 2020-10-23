@@ -1,10 +1,10 @@
 /****************************************************/
-/* PALISADE BGV velocity calculator    				*/
+/* PALISADE BGV velocity calculator                 */
 /* Original written by: Alycia N. Carey             */
-/* Re-write and test by: Chen He 					*/
-/* Parts of code borrowed from:        				*/
-/* demo-packing.cpp                    				*/
-/* final velocity = V_i + at   m/s     				*/
+/* Re-write and test by: Chen He                    */
+/* Parts of code borrowed from:                     */
+/* demo-packing.cpp                                 */
+/* final velocity = V_i + at   m/s                  */
 /****************************************************/
 
 #include <iostream>
