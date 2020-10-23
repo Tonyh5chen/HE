@@ -1,10 +1,10 @@
 /****************************************************/
-/* SEAL CKKS velocity calculator                    */
+/* PALISADE BGV velocity calculator    				*/
 /* Original written by: Alycia N. Carey             */
-/* Update and test by: Chen He 						*/
-/* Parts of code borrowed from:                     */
-/* 4_CKKS_basics.cpp                                */
-/* final velocity = V_i + at   m/s                  */
+/* Re-write and test by: Chen He 					*/
+/* Parts of code borrowed from:        				*/
+/* demo-packing.cpp                    				*/
+/* final velocity = V_i + at   m/s     				*/
 /****************************************************/
 
 #include <iostream>
