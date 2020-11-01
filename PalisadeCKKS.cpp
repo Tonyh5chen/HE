@@ -45,7 +45,7 @@ int main()
 	clock_t cc_clock;
 	cc_clock = clock();
 
-	uint32_t multDepth = 2;
+	uint32_t multDepth = 1;
 	uint32_t scaleFactorBits = 50;
 	uint32_t batchSize = 4096; //num plaintext slots
 	SecurityLevel securityLevel = HEStd_128_classic;
@@ -152,4 +152,6 @@ int main()
 
 	return 0;
 }
+
+
 

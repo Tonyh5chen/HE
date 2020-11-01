@@ -63,15 +63,6 @@ int main() {
 
   ArbBGVLinearRegressionPackedArray();
 
-  // std::cout
-  //     << "\n===========BFV TESTS (INNER-PRODUCT-ARBITRARY)===============: "
-  //     << std::endl;
-
-  // ArbBFVLinearRegressionPackedArray();
-
-  // std::cout << "Please press any key to continue..." << std::endl;
-
-  // std::cin.get();
   return 0;
 }
 
@@ -133,25 +124,19 @@ void ArbBGVLinearRegressionPackedArray() {
 
   auto zeroAlloc = [=]() { return cc->MakePackedPlaintext({0}); };
 
-  Matrix<Plaintext> xP = Matrix<Plaintext>(zeroAlloc, 1, 2);
+  Matrix<Plaintext> xP1 = Matrix<Plaintext>(zeroAlloc, 1, 2);
 
-  // xP(0, 0) = cc->MakePackedPlaintext({0, 2, 1, 3, 2, 2, 1, 2});
-  // xP(0, 1) = cc->MakePackedPlaintext({1, 1, 2, 1, 1, 1, 3, 2});
-  xP(0, 0) = cc->MakePackedPlaintext({0, 2, 4, 6, 8, 10, 12, 14});
-  xP(0, 1) = cc->MakePackedPlaintext({1, 1, 1, 1, 1, 1, 1, 1});
-  //xP(0, 1) = cc->MakePackedPlaintext({100, 100, 100, 100, 100, 100, 100, 100});
+  xP1(0, 0) = cc->MakePackedPlaintext({0, 1, 2, 3, 4, 5, 6, 7});
+  xP1(0, 1) = cc->MakePackedPlaintext({1, 1, 1, 1, 1, 1, 1, 1});
 
-  std::cout << "Input array X0 \n\t" << xP(0, 0) << std::endl;
-  std::cout << "Input array X1 \n\t" << xP(0, 1) << std::endl;
+  std::cout << "Input array X0 \n\t" << xP1(0, 0) << std::endl;
+  std::cout << "Input array X1 \n\t" << xP1(0, 1) << std::endl;
 
-  //Matrix operation example
-  //Linear regression
-  //Multiple Linear regession
 
-  Matrix<Plaintext> yP = Matrix<Plaintext>(zeroAlloc, 2, 1);
+  Matrix<Plaintext> yP1 = Matrix<Plaintext>(zeroAlloc, 2, 1);
 
-  yP(0, 0) = cc->MakePackedPlaintext({0, 1, 2, 3, 4, 5, 6, 7});
-  std::cout << "Input array Y \n\t" << yP(0, 0) << std::endl;
+  yP1(0, 0) = cc->MakePackedPlaintext({0, 1, 2, 3, 8, 10, 12, 14});
+  std::cout << "Input array Y \n\t" << yP1(0, 0) << std::endl;
 
   ////////////////////////////////////////////////////////////
   // Encryption
@@ -159,13 +144,13 @@ void ArbBGVLinearRegressionPackedArray() {
 
   std::cout << "Starting encryption of x" << std::endl;
 
-  shared_ptr<Matrix<RationalCiphertext<Poly>>> x =
-      cc->EncryptMatrix(kp.publicKey, xP);
+  shared_ptr<Matrix<RationalCiphertext<Poly>>> x1 =
+      cc->EncryptMatrix(kp.publicKey, xP1);
 
   std::cout << "Starting encryption of y" << std::endl;
 
-  shared_ptr<Matrix<RationalCiphertext<Poly>>> y =
-      cc->EncryptMatrix(kp.publicKey, yP);
+  shared_ptr<Matrix<RationalCiphertext<Poly>>> y1 =
+      cc->EncryptMatrix(kp.publicKey, yP1);
 
   ////////////////////////////////////////////////////////////
   // Linear Regression
@@ -173,9 +158,7 @@ void ArbBGVLinearRegressionPackedArray() {
   //return the parameter vector using (x^T x)^{-1} x^T y (using least
   //* squares method
 
-
-
-  auto result = cc->EvalLinRegressBatched(x, y,8);
+  auto result = cc->EvalLinRegressBatched(x1, y1,4);
 
   //////////////////////////////////////////////////////////
   //Decryption

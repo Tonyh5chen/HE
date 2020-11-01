@@ -25,7 +25,7 @@ void example_ckks_basics()
 
     EncryptionParameters parms(scheme_type::CKKS);
 
-     size_t poly_modulus_degree = 8192; //  4096 8192 16324
+    size_t poly_modulus_degree = 8192; //  8192 generate 4096 slots, 16384 generate 8192 slots
     parms.set_poly_modulus_degree(poly_modulus_degree);
     parms.set_coeff_modulus(CoeffModulus::Create(
         poly_modulus_degree, { 60, 40, 40, 60 }));
@@ -60,7 +60,7 @@ void example_ckks_basics()
     clock_t enc_clock;
     enc_clock = clock();
 
-    int N = 2048; 
+    int N = slot_count; 
     vector<double> initial_velocity; 
     vector<double> times; 
     vector<double> acc;   

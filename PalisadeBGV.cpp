@@ -51,10 +51,10 @@ int main()
 	cc_clock = clock();
 	//test
   	// Set the main parameters
- 	int plaintextModulus = 1032193;
+ 	int plaintextModulus = 65537; //1032193 generate 8192 slots
  	double sigma = 3.2;
  	SecurityLevel securityLevel = HEStd_128_classic;
- 	uint32_t depth = 2;
+ 	uint32_t depth = 1;
 
 	// Instantiate the crypto context
 	 CryptoContext<DCRTPoly> cc = 
@@ -66,18 +66,13 @@ int main()
 	cc->Enable(LEVELEDSHE);
 
 
-
 	cc_clock = clock() - cc_clock;
 
-	//std::cout << "Number of Slots:" << batchSize << std::endl;
 	/*****KeyGen*****/
 	clock_t key_clock;
 	key_clock = clock();
 
-	// LPKeyPair<Poly> kp = cc->KeyGen();
-	// cc->EvalSumKeyGen(kp.secretKey);
-	// cc->EvalMultKeyGen(kp.secretKey);
-	  // Initialize Public Key Containers
+	// Initialize Public Key Containers
   	LPKeyPair<DCRTPoly> keyPair;
 
  	 // Generate a public/private key pair
@@ -123,10 +118,6 @@ int main()
 
 	enc_clock = clock() - enc_clock;
 
-	// std::cout << "Initial Velocity \n\t" << initial_velocity << std::endl;
-	// std::cout << "Times \n\t" << times << std::endl;
-	// std::cout << "Acceleration \n\t" << acc << std::endl;
-
 	/*****Evaluate*****/
 	clock_t eval_clock;
 	eval_clock = clock();
@@ -169,3 +160,5 @@ int main()
 	cout << "Decryption            : " << ((float)dec_clock)/CLOCKS_PER_SEC << endl;
 
 }
+
+

@@ -1,10 +1,10 @@
 /****************************************************/
-/* PALISADE BGV velocity calculator                 */
+/* PALISADE BGV velocity calculator    				*/
 /* Original written by: Alycia N. Carey             */
-/* Re-write and test by: Chen He                    */
-/* Parts of code borrowed from:                     */
-/* demo-packing.cpp                                 */
-/* final velocity = V_i + at   m/s                  */
+/* Re-write and test by: Chen He 					*/
+/* Parts of code borrowed from:        				*/
+/* demo-packing.cpp                    				*/
+/* final velocity = V_i + at   m/s     				*/
 /****************************************************/
 
 #include "palisade.h"
@@ -141,36 +141,18 @@ int main()
 
 	dec_clock = clock() - dec_clock;
 
-	//Test advance operations
-	clock_t eval_sum_clock;
-	eval_sum_clock = clock();
-	//Evalsum
-	auto enc_final_vel_sum = cryptoContext->EvalSum(enc_final_vel, N);
-	eval_sum_clock = clock() - eval_sum_clock;
-	//decrypt
-	clock_t dec_sum_clock;
-	dec_sum_clock = clock();
-
-	Plaintext plain_final_velocity_sum;
-	cryptoContext->Decrypt(keyPair.secretKey, enc_final_vel_sum, &plain_final_velocity_sum);
-
-	dec_sum_clock = clock() - dec_sum_clock;
 
 	//EvalInnerProduct
 	clock_t eval_IP_clock;
 	eval_IP_clock = clock();
-	auto enc_final_vel_InnerProduct = cryptoContext->EvalInnerProduct(enc_final_vel,enc_final_vel, N);
+	auto enc_final_vel_InnerProduct = cryptoContext->EvalInnerProduct(enc_initial_vel,enc_initial_vel, N);
 	eval_IP_clock = clock() - eval_IP_clock;
 
 	clock_t dec_IP_clock;
 	dec_IP_clock = clock();
-	Plaintext plain_final_velocity_InnerProduct;
-	cryptoContext->Decrypt(keyPair.secretKey, enc_final_vel_InnerProduct, &plain_final_velocity_InnerProduct);
+	Plaintext plain_initial_velocity_InnerProduct;
+	cryptoContext->Decrypt(keyPair.secretKey, enc_final_vel_InnerProduct, &plain_initial_velocity_InnerProduct);
 	dec_IP_clock = clock() - dec_IP_clock;
-
-	// auto enc_final_vel_lr= cryptoContext->EvalLinRegression(enc_final_vel,enc_final_vel);
-	// Plaintext plain_final_velocity_lr;
-	// cryptoContext->Decrypt(keyPair.secretKey, enc_final_vel_lr, &plain_final_velocity_lr);
 
 	/*****Print*****/
 	cout << "Starting the velocity caluculator with " << N << " instances. "<< endl << endl;
@@ -190,8 +172,8 @@ int main()
 	// cout << " Final Velocity Sum: " << endl;
 	// print(plain_final_velocity_sum, N);
 
-	cout << " Final Velocity Inner Product: " << endl;
-	print(plain_final_velocity_InnerProduct, N);
+	cout << " Initial Velocity Inner Product: " << endl;
+	print(plain_initial_velocity_InnerProduct, N);
 
 	return 0;
 }

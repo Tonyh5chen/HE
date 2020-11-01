@@ -24,12 +24,11 @@ int example_bfv_basics()
     cc_clock = clock();
 
     EncryptionParameters parms(scheme_type::BFV);
-    size_t poly_modulus_degree = 4096; //8192 or 16384 or 32768
+    size_t poly_modulus_degree = 2048; //8192 or 16384 or 32768
     parms.set_poly_modulus_degree(poly_modulus_degree);
     auto count=CoeffModulus::MaxBitCount(poly_modulus_degree);
     cout << "count: " << count << endl;
     parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));
-    //cout << "parms_set_coeff_modulus: " << coeff_modulus << endl;
     //Enable batching
     parms.set_plain_modulus(PlainModulus::Batching(poly_modulus_degree, 20));
 
@@ -48,7 +47,7 @@ int example_bfv_basics()
     KeyGenerator keygen(context);
     PublicKey public_key = keygen.public_key();
     SecretKey secret_key = keygen.secret_key();
-    Serializable<RelinKeys> rlk = keygen.relin_keys();
+    //Serializable<RelinKeys> rlk = keygen.relin_keys();
 
     key_clock = clock() - key_clock;
 
@@ -68,42 +67,24 @@ int example_bfv_basics()
     clock_t enc_clock;
     enc_clock = clock();
     //Generate the matrices of values 
-    int N = 2760; //or 100 or 1000 or 2760 or 4096 or 8192 or 16384 or 32768
-    // vector<uint64_t> initial_velocity(slot_count, 0ULL);    
-    // vector<uint64_t> times(slot_count, 0ULL);               
-    // vector<uint64_t> acc(slot_count, 0ULL);   
+    int N = slot_count; //or 100 or 1000 or 2760 or 4096 or 8192 or 16384 or 32768
+
     vector<uint64_t> initial_velocity;    
     vector<uint64_t> times;               
     vector<uint64_t> acc;               
 
     for(int i = 0; i < N; i++)
     {
-        int64_t a = rand() % 10000 + 1;
+        int64_t a = rand() % 100 + 1;
         acc.push_back(a);
 
-        int64_t b = rand() % 10000 + 1;
+        int64_t b = rand() % 100 + 1;
         initial_velocity.push_back(b);
 
-        int64_t c = rand() % 10000 + 1;
+        int64_t c = rand() % 1000 + 1;
         times.push_back(c);
     }
-    // for(int r = 0; r < 2; r++)
-    // {
-    //     for(int c = 0; c < N/2; c++) 
-    //     {
-    //         unsigned long long int a = rand() % 10;
-    //         acc[r*row_size + c] = a;
-
-    //         unsigned long long int b = rand() % 10;
-    //         initial_velocity[r*row_size + c] = b;
-
-    //         unsigned long long int d = rand() % 10;
-    //         times[r*row_size + c] = d;
-    //     }
-    // }
-    
-    
-    
+     
     /*****Encode*****/
     Plaintext plain_initial_vel;
     Plaintext plain_times;
@@ -121,9 +102,6 @@ int example_bfv_basics()
     encryptor.encrypt(plain_initial_vel, enc_initial_vel);
     encryptor.encrypt(plain_times, enc_times);
     encryptor.encrypt(plain_acc, enc_acc);
-    // encryptor.encrypt(initial_velocity, enc_initial_vel);
-    // encryptor.encrypt(times, enc_times);
-    // encryptor.encrypt(acc, enc_acc);
 
     enc_clock = clock() - enc_clock;
 
@@ -150,7 +128,6 @@ int example_bfv_basics()
     dec_clock = clock() - dec_clock;
 
     /*****Decode*****/
-    //vector<uint64_t> final_vel;
     batch_encoder.decode(plain_final_vel, final_vel);
     
     /*****Print*****/
