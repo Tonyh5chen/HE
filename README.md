@@ -20,7 +20,7 @@ Make HElibBGV.cpp and you can run the executable for the HElib BGV test
 ### SEAL
 SEAL build & install prerequisites and instructions please refer to: https://github.com/microsoft/SEAL#building-microsoft-seal-manually
 We can test the working examples at ```/SEAL/bin/sealexamples``` and check if we build and install successfully.
-Make SEALBFV.cpp SEALCKKS.cpp and you can run executable for the SEAL bfv and ckks test 
+For this project, I simply subsitute the original example 1 and 4 in the sealexamples to our test code SEALBFV.cpp and SEALCKKS.cpp without changing the rest of existing test examples provided by SEAL. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
 
 ### Palisade
 Palisade build & install prerequisites and instructions please refer to: https://gitlab.com/palisade/palisade-release/-/tree/master
