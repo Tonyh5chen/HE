@@ -23,7 +23,7 @@ To test the example code, we will first need to build and install the respective
 3. Subsitute the eample code 1_bfv_basics.cpp to SEALBFV.cpp code and 4_ckks_basics.ccp code to SEALCKKS.cpp code in the ```SEAL/native/sealexamples``` and make the sealexample exectuable. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
 
 ### Palisade
-Palisade build & install prerequisites and instructions please refer to: https://gitlab.com/palisade/palisade-release/-/tree/master
-We can test the working examples at ```/palisade-release/bin/examples/pke``` and check if we build and install successfully.
-Clone the Palisade code from this repo to ```/palisade-release/src/pke/examples``` and make from ```/palidade-release``` directory
-We then can find the executable in ```/palisade-release/bin/examples/pke``` and run the respective palisade test 
+1. Palisade build & install prerequisites and instructions please refer to: https://gitlab.com/palisade/palisade-release/-/tree/master
+2. We can test the working examples at ```/palisade-release/bin/examples/pke``` and check if we build and install successfully.
+3. Clone the Palisade code from this repo to ```/palisade-release/src/pke/examples``` and make from ```/palidade-release``` directory
+4. We then can find the executable in ```/palisade-release/bin/examples/pke``` and run the respective palisade test 
