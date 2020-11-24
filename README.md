@@ -13,14 +13,14 @@ To test the example code, we will first need to build and install the respective
 
 
 ### HElib
-HElib build & install prerequisites and instructions please refer to: https://github.com/homenc/HElib/blob/master/INSTALL.md
-We can test fully working examples under ```helib/examples``` to check if we build and install successfully.
-Make HElibBGV.cpp and you can run the executable for the HElib BGV test
+1. HElib build & install prerequisites and instructions please refer to: https://github.com/homenc/HElib/blob/master/INSTALL.md
+2. Once installed, We can test fully working examples provided by HElib under ```helib/examples``` to check if we build and install successfully.
+2. Make HElibBGV.cpp and we can run the executable for the HElib BGV test
 
 ### SEAL
-SEAL build & install prerequisites and instructions please refer to: https://github.com/microsoft/SEAL#building-microsoft-seal-manually
-We can test the working examples at ```/SEAL/bin/sealexamples``` and check if we build and install successfully.
-For this project, I simply subsitute the original example 1 and 4 in the sealexamples to our test code SEALBFV.cpp and SEALCKKS.cpp without changing the rest of existing test examples provided by SEAL. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
+1. SEAL build & install prerequisites and instructions please refer to: https://github.com/microsoft/SEAL#building-microsoft-seal-manually
+2. Once installed, we can test the working examples at ```/SEAL/bin/sealexamples``` and check if we build and install successfully.
+3. Subsitute the eample code 1_bfv_basics.cpp to SEALBFV.cpp code and 4_ckks_basics.ccp code to SEALCKKS.cpp code in the ```SEAL/native/sealexamples``` and make the sealexample exectuable. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
 
 ### Palisade
 Palisade build & install prerequisites and instructions please refer to: https://gitlab.com/palisade/palisade-release/-/tree/master
