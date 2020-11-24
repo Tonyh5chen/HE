@@ -15,12 +15,12 @@ To test the example code, we will first need to build and install the respective
 ### HElib
 1. HElib build & install prerequisites and instructions please refer to: https://github.com/homenc/HElib/blob/master/INSTALL.md
 2. Once installed, We can test fully working examples provided by HElib under ```helib/examples``` to check if we build and install successfully.
-2. Make HElibBGV.cpp and we can run the executable for the HElib BGV test
+2. Clone HElibBGV.cpp from this repo to ```helib/examples``` and make it and we can run the executable for the HElib BGV test
 
 ### SEAL
 1. SEAL build & install prerequisites and instructions please refer to: https://github.com/microsoft/SEAL#building-microsoft-seal-manually
 2. Once installed, we can test the working examples at ```/SEAL/bin/sealexamples``` and check if we build and install successfully.
-3. Subsitute the eample code 1_bfv_basics.cpp to SEALBFV.cpp code and 4_ckks_basics.ccp code to SEALCKKS.cpp code in the ```SEAL/native/sealexamples``` and make the sealexample exectuable. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
+3. Clone SEALBFV.cpp and SEALCKKS.cpp to SEAL folder, and subsitute the example code 1_bfv_basics.cpp to SEALBFV.cpp code and 4_ckks_basics.ccp code to SEALCKKS.cpp code in the ```SEAL/native/sealexamples``` and make the sealexample exectuable. Once we can make the sealexamples executable, we can then test SEAL bfv and ckks test in example 1 & 4.
 
 ### Palisade
 1. Palisade build & install prerequisites and instructions please refer to: https://gitlab.com/palisade/palisade-release/-/tree/master
